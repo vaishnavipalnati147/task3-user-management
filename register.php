@@ -13,13 +13,15 @@ if(isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	$user = $_POST['username'];
 	$pass = $_POST['password'];
-
+	$image = $_FILES['image']['name'];
+    $tmp = $_FILES['image']['tmp_name'];
+    move_uploaded_file($tmp, "uploads/".$image);
 	if($user == "" || $pass == "" || $name == "" || $email == "") {
 		echo "All fields should be filled. Either one or many fields are empty.";
 		echo "<br/>";
 		echo "<a href='register.php'>Go back</a>";
 	} else {
-		mysqli_query($mysqli, "INSERT INTO login(name, email, username, password) VALUES('$name', '$email', '$user', md5('$pass'))")
+		mysqli_query($mysqli, "INSERT INTO login(name, email, username, password, image) VALUES('$name', '$email', '$user', md5('$pass'), '$image')")
 			or die("Could not execute the insert query.");
 			
 		echo "Registration successfully";
@@ -29,7 +31,7 @@ if(isset($_POST['submit'])) {
 } else {
 ?>
 	<p><font size="+2">Register</font></p>
-	<form name="form1" method="post" action="">
+	<form name="form1" method="post" action="" enctype="multipart/form-data">
 		<table width="75%" border="0">
 			<tr> 
 				<td width="10%">Full Name</td>
@@ -47,6 +49,10 @@ if(isset($_POST['submit'])) {
 				<td>Password</td>
 				<td><input type="password" name="password"></td>
 			</tr>
+			<tr>
+                <td>Profile Picture</td>
+                <td><input type="file" name="image" accept=".jpg,.jpeg,.png"></td>
+            </tr>
 			<tr> 
 				<td>&nbsp;</td>
 				<td><input type="submit" name="submit" value="Submit"></td>
