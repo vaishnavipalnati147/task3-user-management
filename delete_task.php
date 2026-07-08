@@ -14,9 +14,9 @@ include("connection.php");
 $id = $_GET['id'];
 
 //deleting the row from table
-$result=mysqli_query($mysqli, "DELETE FROM products WHERE id=$id");
+$result=mysqli_query($mysqli, "DELETE FROM tasks WHERE id=$id");
 
 //redirecting to the display page (view.php in our case)
-header("Location:view.php");
+header("Location:view_task.php");
 ?>
 

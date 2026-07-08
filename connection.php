@@ -1,7 +1,7 @@
 <?php
 
 $databaseHost = "localhost";
-$databaseName = "crud_with_login";
+$databaseName = "task_management";
 $databaseUsername = "root";
 $databasePassword = "";
 
